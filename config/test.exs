@@ -6,5 +6,9 @@ config :galendar, Galendar.Endpoint,
   http: [port: 4001],
   server: false
 
+config :galendar,
+  oauth_client_id: "client_id",
+  oauth_client_secret: "client_secret"
+
 # Print only warnings and errors during test
 config :logger, level: :warn
