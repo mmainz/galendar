@@ -1,4 +1,5 @@
 defmodule Galendar do
+  @moduledoc false
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -10,7 +11,8 @@ defmodule Galendar do
     children = [
       # Start the endpoint when the application starts
       supervisor(Galendar.Endpoint, []),
-      # Start your own worker by calling: Galendar.Worker.start_link(arg1, arg2, arg3)
+      # Start your own worker by calling: Galendar.Worker.start_link(arg1, arg2,
+      # arg3)
       # worker(Galendar.Worker, [arg1, arg2, arg3]),
     ]
 
