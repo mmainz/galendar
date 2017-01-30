@@ -10,7 +10,7 @@ defmodule Plugs.GithubAuthTest do
       "client_id=client_id&" <>
       "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fauth%2Fcallback&" <>
       "response_type=code&" <>
-      "scope=read%3Aorg%2Crepo%3Astatus" == redirected_to(conn)
+      "scope=user%2Cread%3Aorg%2Crepo" == redirected_to(conn)
   end
 
   test "does nothing to authorized requests", %{conn: conn} do

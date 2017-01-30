@@ -12,7 +12,7 @@ defmodule GithubTest do
       "client_id=client_id&" <>
       "redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fauth%2Fcallback&" <>
       "response_type=code&" <>
-      "scope=read%3Aorg%2Crepo%3Astatus" == Github.authorize_url!
+      "scope=user%2Cread%3Aorg%2Crepo" == Github.authorize_url!
   end
 
   test "gets an auth token" do

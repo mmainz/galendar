@@ -1,6 +1,6 @@
 defmodule Github do
   @moduledoc false
-  @scope "read:org,repo:status"
+  @scope "user,read:org,repo"
 
   use OAuth2.Strategy
 
