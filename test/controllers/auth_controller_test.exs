@@ -8,11 +8,19 @@ defmodule Galendar.AuthTest do
   defp get_token_mock(_), do: %{token: %{access_token: "token"}}
   defp expected_token, do: %{"access_token" => "token"}
 
+  defp token do
+    %{token_type: "Bearer", access_token: "token"}
+    |> Poison.encode!
+    |> Base.encode64
+  end
+
+  defp decode(token), do: token |> Base.decode64! |> Poison.decode!
+
   test "puts token in a cookie if it can be obtained", %{conn: conn} do
     with_mock Github, [get_token!: &get_token_mock/1] do
       conn = get conn, "/auth/callback", %{code: "12345"}
       assert redirected_to(conn, 302)
-      assert expected_token() == Poison.decode!(conn.cookies["auth_token"])
+      assert expected_token() == decode(conn.cookies["auth_token"])
     end
   end
 
@@ -32,7 +40,7 @@ defmodule Galendar.AuthTest do
 
   test "authorized user sees the page", %{conn: conn} do
     conn = conn
-    |> put_req_cookie("auth_token", "code")
+    |> put_req_cookie("auth_token", token())
     |> get("/")
     assert html_response(conn, 200)
   end
